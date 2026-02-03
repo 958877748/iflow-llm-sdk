@@ -35,10 +35,23 @@ function createIFlowProvider() {
       return fetch(url, {
         ...options,
         headers: {
-          ...options?.headers,
+          ...(options?.headers || {}),
           'Authorization': `Bearer ${apiKey}`,
+          'user-agent': 'iFlow-Cli',
         },
       });
+    },
+    // 请求体转换：为 glm-4.7 模型添加 chat_template_kwargs
+    transformRequestBody: (args) => {
+      if (args.model === 'glm-4.7') {
+        return {
+          ...args,
+          chat_template_kwargs: {
+            enable_thinking: false,
+          },
+        };
+      }
+      return args;
     },
   });
 }
