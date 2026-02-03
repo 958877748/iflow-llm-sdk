@@ -1,5 +1,5 @@
 {
-    "name": "iflow-llm-sdk",
+    "name": "@guolei1994/iflow",
     "version": "1.0.0",
     "description": "iFlow LLM SDK - 使用 iFlow CLI 认证调用 LLM API",
     "main": "dist/index.js",

@@ -5,7 +5,7 @@
 ## 安装
 
 ```bash
-npm install iflow-llm-sdk
+npm install @guolei1994/iflow
 ```
 
 ## 前置要求
@@ -22,7 +22,7 @@ iflow login
 ### 方式1: 简单使用（推荐）
 
 ```typescript
-import { createIFlowClient } from 'iflow-llm-sdk';
+import { createIFlowClient } from '@guolei1994/iflow';
 
 const client = await createIFlowClient();
 
@@ -36,7 +36,7 @@ console.log(response);
 ### 方式2: 流式输出
 
 ```typescript
-import { IFlowClient } from 'iflow-llm-sdk';
+import { IFlowClient } from '@guolei1994/iflow';
 
 const client = new IFlowClient();
 await client.init();
@@ -53,6 +53,11 @@ for await (const chunk of stream) {
 ### 方式3: 原始 OpenAI SDK 接口
 
 ```typescript
+import { IFlowClient } from '@guolei1994/iflow';
+
+const client = new IFlowClient();
+await client.init();
+
 const response = await client.chat(
     [{ role: 'user', content: '1+1=?' }],
     { model: 'glm-4.7', stream: false }
@@ -60,6 +65,29 @@ const response = await client.chat(
 
 // response 是 OpenAI SDK 返回的完整对象
 console.log(response.choices[0].message.content);
+```
+
+### 方式4: AI SDK 集成（推荐用于 AI SDK 生态）
+
+```typescript
+import { iflow } from '@guolei1994/iflow';
+import { generateText, streamText } from 'ai';
+
+// 非流式调用
+const { text } = await generateText({
+  model: iflow('iFlow-ROME-30BA3B'),
+  prompt: '写一个快速排序算法',
+});
+
+// 流式调用
+const { textStream } = await streamText({
+  model: iflow('iFlow-ROME-30BA3B'),
+  prompt: '介绍 JavaScript 的闭包概念',
+});
+
+for await (const chunk of textStream) {
+  process.stdout.write(chunk);
+}
 ```
 
 ## 支持的模型
@@ -111,7 +139,7 @@ SDK 使用 iFlow CLI 的 OAuth 凭证：
 ## 自定义日志
 
 ```typescript
-import { createIFlowClient } from 'iflow-llm-sdk';
+import { createIFlowClient } from '@guolei1994/iflow';
 
 const logger = {
     trace: () => {},
