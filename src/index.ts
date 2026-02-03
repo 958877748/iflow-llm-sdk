@@ -10,6 +10,9 @@ export { IFlowCliAuth } from './auth/iflowCliAuth';
 // 客户端
 export { IFlowClient, createIFlowClient } from './client/iflowClient';
 
+// AI SDK Provider（类似 @ai-sdk/deepseek）
+export { iflow, refreshIFlowProvider } from './ai-sdk-provider';
+
 // 类型
 export type {
     OAuthCredentials,
