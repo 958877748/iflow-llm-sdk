@@ -1,0 +1,31 @@
+{
+    "name": "iflow-llm-sdk",
+    "version": "1.0.0",
+    "description": "iFlow LLM SDK - 使用 iFlow CLI 认证调用 LLM API",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "test": "node dist/test.js"
+    },
+    "keywords": [
+        "iflow",
+        "llm",
+        "openai",
+        "cli",
+        "ai"
+    ],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "openai": "^4.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "typescript": "^5.0.0"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    }
+}
